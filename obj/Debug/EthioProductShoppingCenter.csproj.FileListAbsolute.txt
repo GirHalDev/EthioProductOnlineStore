@@ -76,3 +76,7 @@ D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\obj\Debug\E
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\obj\Debug\EthioProductShoppingCenter.csproj.CopyComplete
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\obj\Debug\EthioProductShoppingCenter.dll
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\obj\Debug\EthioProductShoppingCenter.pdb
+D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\EntityFramework.dll
+D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\EntityFramework.SqlServer.dll
+D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\EntityFramework.xml
+D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\EntityFramework.SqlServer.xml
