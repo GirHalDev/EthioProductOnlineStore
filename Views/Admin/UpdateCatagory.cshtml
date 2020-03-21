@@ -1,0 +1,30 @@
+﻿@model EthioProductShoppingCenter.Models.CatagoryDetail
+@{
+    ViewBag.Title = "UpdateCatagory";
+    Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Catagory Details</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> <i class="fa fa-plus"></i> Add New Catagory </a>
+</div>
+<div class="card-body">
+    @using (Html.BeginForm("UpdateCatagory", "Admin", FormMethod.Post, new { enctype = "multipart/formdata" }))
+    {
+    
+         @Html.HiddenFor(x => x.CatagoryId)
+
+         <div class="form-group">
+             <label class="control-label">Catagory Name</label>
+
+             @Html.TextBoxFor(x => x.CatagoryName, new { @class = "form-control", required = "required", autofocus = "autofocus", placeholder = "Catagory Name" })
+             @Html.ValidationMessageFor(x => x.CatagoryName, "", new { @class="text-danger"})
+         </div>
+
+         <!--loads the previous URL in the history list-->
+         <a onclick="window.history.back();" class="btn btn-danger">Cancel</a>
+         <input type="submit" class="btn btn-primary" value="Save" />
+    }
+</div>
+

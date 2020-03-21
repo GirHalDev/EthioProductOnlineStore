@@ -8,6 +8,7 @@ namespace EthioProductShoppingCenter.Repository
 {
     public interface IRepository<tblEntity> where tblEntity: class
     {
+        int GetAllRecordsCount();
         IEnumerable<tblEntity> GetAllRecords();
         IQueryable<tblEntity> GetAllRecordsIQueryable();
         void Add(tblEntity entity);
@@ -21,5 +22,6 @@ namespace EthioProductShoppingCenter.Repository
         tblEntity GetFirstOrDefaultByParameter(Expression<Func<tblEntity, bool>> wherePredict);
         IEnumerable<tblEntity> GetListParameter(Expression<Func<tblEntity, bool>> wherePredict);
         IEnumerable<tblEntity> GetResultBySqlProcedure(string query, params object[] parameters);
+        IEnumerable<tblEntity> GetRecordsToShow(int pageNo, int pageSize, int currentPage, Expression<Func<tblEntity, bool>> wherePredict, Expression<Func<tblEntity, int>> orderByPredict);
     }
 }
