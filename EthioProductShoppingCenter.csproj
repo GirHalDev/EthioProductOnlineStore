@@ -2015,6 +2015,8 @@
     <Content Include="Views\Admin\Catagories.cshtml" />
     <Content Include="Views\Admin\UpdateCatagory.cshtml" />
     <Content Include="Views\Admin\Product.cshtml" />
+    <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Admin\AddProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

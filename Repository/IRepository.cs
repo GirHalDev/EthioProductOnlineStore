@@ -8,6 +8,7 @@ namespace EthioProductShoppingCenter.Repository
 {
     public interface IRepository<tblEntity> where tblEntity: class
     {
+        IEnumerable<tblEntity> GetProduct();
         int GetAllRecordsCount();
         IEnumerable<tblEntity> GetAllRecords();
         IQueryable<tblEntity> GetAllRecordsIQueryable();

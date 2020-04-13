@@ -4,13 +4,13 @@
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
 }
-
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Catagory Details</h1>
-            <a href="../Admin/AddCatagory" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> <i class="fa fa-plus"></i> Add New </a>
+            <h1 class="h3 mb-0 text-gray-800">Product Details</h1>
+            <a href="../Admin/AddProduct/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> <i class="fa fa-plus"></i> Add Product </a>
         </div>
 
 
@@ -25,29 +25,40 @@
                         <thead>
                             <tr>
                                 <th>Sr. No.</th>
-                                <th>Catagory Name</th>
+                                <th>Product Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Sr. No.</th>
-                                <th>Catagory Name</th>
+                                <th>Product Name</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                int count = 1;
                                 <tr>
-                                    <td>@item.CatagoryId</td>
-                                    <td>@item.CatagoryName</td>
-                                    <td><a href="#">Edit</a></td>
+                                    <td>@item.ProductId</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@Html.ActionLink("Edit", "EditProduct", new {productId = item.ProductId })</td>
                                 </tr>
+                                count++;
 
                             }
                         </tbody>
                     </table>
+
+                    <ul class="pagination pull-right">
+                        <li> <a href="#">&laquo;</a></li>
+                        <li> <a href="#">1</a></li>
+                        <li> <a href="#">2</a></li>
+                        <li> <a href="#">3</a></li>
+                        <li> <a href="#">4</a></li>
+                        <li> <a href="#">&raquo;</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

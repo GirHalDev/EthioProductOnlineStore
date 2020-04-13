@@ -26,6 +26,11 @@ namespace EthioProductShoppingCenter.Repository
             dbEntities.SaveChanges();
         }
 
+        public IEnumerable<tblEntity> GetProduct()
+        {
+            return table.ToList();
+        }
+
         public IEnumerable<tblEntity> GetAllRecords()
         {
             return table.ToList();
@@ -111,10 +116,12 @@ namespace EthioProductShoppingCenter.Repository
             }
         }
 
+        
         public void Update(tblEntity entity)
         {
             table.Attach(entity);
             dbEntities.Entry(entity).State = EntityState.Modified;
+            dbEntities.SaveChanges();
         }
 
         public void UpdateByWhereClause(System.Linq.Expressions.Expression<Func<tblEntity, bool>> wherePredict, Action<tblEntity> ForEachPredicate)
