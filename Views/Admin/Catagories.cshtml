@@ -42,7 +42,7 @@
                             <tr>
                                 <td>@item.CatagoryId</td>
                                 <td>@item.CatagoryName</td>
-                                <td><a href="#">Edit</a></td>
+                                <td>@Html.ActionLink("Edit", "EditCatagory", new { catagoryId = item.CatagoryId })</td>
                             </tr>
 
                         }

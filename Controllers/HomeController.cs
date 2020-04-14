@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EthioProductShoppingCenter.DAL;
+using EthioProductShoppingCenter.Models.Home;
+using EthioProductShoppingCenter.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +13,9 @@ namespace EthioProductShoppingCenter.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomeIndexViewModel model = new HomeIndexViewModel();
+
+            return View(model.CreateModel());
         }
 
         public ActionResult About()

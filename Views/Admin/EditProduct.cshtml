@@ -1,18 +1,18 @@
 ﻿@model EthioProductShoppingCenter.DAL.tblProduct
 
 @{
-    ViewBag.Title = "Edit Product";
+    ViewBag.Title = "EditProduct";
     Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
 }
 
-@*<h2>EditProduct</h2>*@
+<h2>EditProduct</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Edit Product</h4>
+        <h4>tblProduct</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ProductId)
@@ -26,10 +26,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CatagoryId, "CatagoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CatagoryId, "Catagory", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("CatagoryId", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.EditorFor(model => model.CatagoryId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("CatagoryId",  (List<SelectListItem>)ViewBag.CatagoryList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CatagoryId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
             @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
+                    @Html.CheckBox("IsActive")
                     @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -48,7 +48,7 @@
             @Html.LabelFor(model => model.IsDelete, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDelete)
+                    @Html.CheckBox("IsDelete")
                     @Html.ValidationMessageFor(model => model.IsDelete, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="file" name="file" style="width:auto" />
                 @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,7 +90,7 @@
             @Html.LabelFor(model => model.IsFeatured, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsFeatured)
+                    @Html.CheckBox("IsFeatured")
                     @Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -121,5 +121,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "DashBoard")
+    @Html.ActionLink("Back to List", "Product")
 </div>

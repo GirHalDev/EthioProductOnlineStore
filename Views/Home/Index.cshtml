@@ -1,13 +1,16 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model EthioProductShoppingCenter.Models.Home.HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <link href="~/Content/custom.css" rel="stylesheet" />
 @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
 @*<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
 <div class="container">
     <div class="row">
- 
         <div>
             <div id="imageCarousel" class="carousel slide" data-interval="2000" data-ride="carousel" style="margin-top:15px;">
                 <ol class="carousel-indicators">
@@ -17,7 +20,7 @@
                     <li data-target="#imageCarousel" data-slide-to="2"></li>
                     <li data-target="#imageCarousel" data-slide-to="3"></li>
                 </ol>
-                @*The slidec show*@
+                @*The slide show*@
                 <div class="carousel-inner">
                     <div class="item active">
                         <img src="~/Images/img_blue_flowers.jpg" class="img-responsive" style="height:200px; width:100%;" />
@@ -61,39 +64,42 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="thumbnail customDiv">
-                Catagory 1
-                <img class="img-responsive" title="Click to view products" src="~/Images/img_blue_flowers.jpg" />
-                <div class="caption">
-                    <h5>Product Name</h5>
-                    <p>$Price</p>
-                    <p>Available</p>
+        @foreach (var item in Model.ListOfProducts)
+        {
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="thumbnail customDiv">
+                    Catagory 1
+                    <img class="img-responsive" title="Click to view products" src="~/ProductImg/@item.ProductImage" />
+                    <div class="caption">
+                        <h5>@item.ProductName</h5>
+                        <p>$@item.Price</p>
+                        @if (item.Quantity > 0)
+                        {
+                            <p>Available</p>
+                        }
+                        else
+                        {
+                            <p>Not Avialabl</p>
+                        }
+                    
+                        <div class="product-item-badge">
+                            @if (item.IsFeatured == true)
+                            {
+                                <p>New</p>
+                            }
+                            else
+                            {
+                                <p>Old</p>
+                            }
 
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="customDiv">Catagory 2</div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="customDiv">Catagory 3</div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="customDiv">Catagory 4</div>
-        </div>
+        }
+
     </div>
 
 </div>
-
-
-@*@section Scripts{
-    <script>
-        $(document).ready(function () {
-
-        }
-
-    </script>
-
-    }*@
-

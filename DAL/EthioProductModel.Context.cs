@@ -34,5 +34,7 @@ namespace EthioProductShoppingCenter.DAL
         public virtual DbSet<tblRole> tblRoles { get; set; }
         public virtual DbSet<tblShippingDetail> tblShippingDetails { get; set; }
         public virtual DbSet<tblSlideImage> tblSlideImages { get; set; }
+
+        public System.Data.Entity.DbSet<EthioProductShoppingCenter.Models.Home.HomeIndexViewModel> HomeIndexViewModels { get; set; }
     }
 }

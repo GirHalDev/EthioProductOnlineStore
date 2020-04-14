@@ -13,6 +13,18 @@ namespace EthioProductShoppingCenter.Controllers
     public class AdminController : Controller
     {
         public GenericUnitOfWork unitOfWork = new GenericUnitOfWork();
+
+        public List<SelectListItem>  GetCatagory()
+        {
+            List<SelectListItem> lists = new List<SelectListItem>();
+            var catagories = unitOfWork.GetRepositoryInstance<tblCatagory>().GetAllRecords();
+            foreach (var item in catagories)
+            {
+                lists.Add(new SelectListItem { Value = item.CatagoryId.ToString(), Text = item.CatagoryName });
+            }
+
+            return lists;
+        }
         // GET: Admin
         public ActionResult DashBoard()
         {
@@ -45,6 +57,20 @@ namespace EthioProductShoppingCenter.Controllers
             return View("UpdateCatagory", cd);
         }
 
+        //GET: Admin/EditCatagory/catagoryId
+        public ActionResult EditCatagory(int catagoryId)
+        {
+            return View(unitOfWork.GetRepositoryInstance<tblCatagory>().GetFirstOrDefault(catagoryId));
+        }
+
+        //POST: Admin/EditCatagory/catagoryId
+        [HttpPost]
+        public ActionResult EditCatagory(tblCatagory catagory)
+        {
+            unitOfWork.GetRepositoryInstance<tblCatagory>().Update(catagory);
+            return RedirectToAction("Catagories");
+        }
+
         //GET: Admin/Product
         public ActionResult Product()
         {
@@ -54,13 +80,24 @@ namespace EthioProductShoppingCenter.Controllers
         //GET: Admin/EditProduct/productId
         public ActionResult EditProduct(int productId)
         {
+            ViewBag.CatagoryList = GetCatagory();
             return View(unitOfWork.GetRepositoryInstance<tblProduct>().GetFirstOrDefault(productId));
         }
 
         //POST: Admin/EditProduct/productId
         [HttpPost]
-        public ActionResult EditProduct(tblProduct product)
+        public ActionResult EditProduct(tblProduct product, HttpPostedFileBase file)
         {
+            string pic = null;
+            if (file != null)
+            {
+                pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/ProductImg/"), pic);
+
+                file.SaveAs(path);
+            }
+            product.ProductImage = file != null ? pic : product.ProductImage; 
+            product.ModifiedDate = DateTime.Now;
             unitOfWork.GetRepositoryInstance<tblProduct>().Update(product);
             return RedirectToAction("Product");
         }
@@ -68,13 +105,27 @@ namespace EthioProductShoppingCenter.Controllers
         //GET: Admin/AddProduct
         public ActionResult AddProduct()
         {
+            ViewBag.CatagoryList = GetCatagory();
             return View();
+
         }
 
         //POST: Admin/AddProduct
         [HttpPost]
-        public ActionResult AddProduct(tblProduct product)
+        public ActionResult AddProduct(tblProduct product, HttpPostedFileBase file)
         {
+            string pic = null;
+            if(file != null)
+            {
+                pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/ProductImg/"), pic);
+
+                file.SaveAs(path);
+            }
+
+            product.ProductImage = pic;
+
+            product.CreatedDate = DateTime.Now;
             unitOfWork.GetRepositoryInstance<tblProduct>().Add(product);
             return RedirectToAction("Product");
         }
