@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="EthioProductModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="tblCart">
-    <Key>
-      <PropertyRef Name="CartId" />
-    </Key>
-    <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductId" Type="Int32" />
-    <Property Name="MemeberId" Type="Int32" />
-    <Property Name="CartStatusId" Type="Int32" />
-    <NavigationProperty Name="tblProduct" Relationship="Self.FK__tblCart__Product__5FB337D6" FromRole="tblCart" ToRole="tblProduct" />
-  </EntityType>
   <EntityType Name="tblCartStatu">
     <Key>
       <PropertyRef Name="CartStatusId" />
@@ -20,12 +10,16 @@
   <EntityType Name="tblCatagory">
     <Key>
       <PropertyRef Name="CatagoryId" />
+      <PropertyRef Name="ID" />
     </Key>
     <Property Name="CatagoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CatagoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="IsDelete" Type="Boolean" />
     <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__Catag__4D94879B" FromRole="tblCatagory" ToRole="tblProduct" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="tblProducts1" Relationship="EthioProductModel.FK__tblProduc__Catag__4D94879B1" FromRole="tblCatagory" ToRole="tblProduct" />
+    <NavigationProperty Name="tblCarts" Relationship="EthioProductModel.FK_tblCart_catagoryId" FromRole="tblCatagory" ToRole="tblCart" />
   </EntityType>
   <EntityType Name="tblMemberRole">
     <Key>
@@ -53,6 +47,7 @@
   <EntityType Name="tblProduct">
     <Key>
       <PropertyRef Name="ProductId" />
+      <PropertyRef Name="ID" />
     </Key>
     <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -65,9 +60,11 @@
     <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="IsFeatured" Type="Boolean" />
     <Property Name="Quantity" Type="Int32" />
-    <NavigationProperty Name="tblCarts" Relationship="Self.FK__tblCart__Product__5FB337D6" FromRole="tblProduct" ToRole="tblCart" />
     <NavigationProperty Name="tblCatagory" Relationship="Self.FK__tblProduc__Catag__4D94879B" FromRole="tblProduct" ToRole="tblCatagory" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="tblCatagory1" Relationship="EthioProductModel.FK__tblProduc__Catag__4D94879B1" FromRole="tblProduct" ToRole="tblCatagory" />
+    <NavigationProperty Name="tblCarts" Relationship="EthioProductModel.FK_tblCart_ProductId" FromRole="tblProduct" ToRole="tblCart" />
   </EntityType>
   <EntityType Name="tblRole">
     <Key>
@@ -100,18 +97,6 @@
     <Property Name="SlideTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="SlideImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
-  <Association Name="FK__tblCart__Product__5FB337D6">
-    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
-    <End Role="tblCart" Type="Self.tblCart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblProduct">
-        <PropertyRef Name="ProductId" />
-      </Principal>
-      <Dependent Role="tblCart">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__tblProduc__Catag__4D94879B">
     <End Role="tblCatagory" Type="Self.tblCatagory" Multiplicity="0..1" />
     <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
@@ -137,7 +122,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="EthioProductEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="tblCarts" EntityType="Self.tblCart" />
     <EntitySet Name="tblCartStatus" EntityType="Self.tblCartStatu" />
     <EntitySet Name="tblCatagories" EntityType="Self.tblCatagory" />
     <EntitySet Name="tblMemberRoles" EntityType="Self.tblMemberRole" />
@@ -146,10 +130,6 @@
     <EntitySet Name="tblRoles" EntityType="Self.tblRole" />
     <EntitySet Name="tblShippingDetails" EntityType="Self.tblShippingDetail" />
     <EntitySet Name="tblSlideImages" EntityType="Self.tblSlideImage" />
-    <AssociationSet Name="FK__tblCart__Product__5FB337D6" Association="Self.FK__tblCart__Product__5FB337D6">
-      <End Role="tblProduct" EntitySet="tblProducts" />
-      <End Role="tblCart" EntitySet="tblCarts" />
-    </AssociationSet>
     <AssociationSet Name="FK__tblProduc__Catag__4D94879B" Association="Self.FK__tblProduc__Catag__4D94879B">
       <End Role="tblCatagory" EntitySet="tblCatagories" />
       <End Role="tblProduct" EntitySet="tblProducts" />
@@ -158,5 +138,118 @@
       <End Role="tblMembers" EntitySet="tblMembers" />
       <End Role="tblShippingDetails" EntitySet="tblShippingDetails" />
     </AssociationSet>
+    <FunctionImport Name="searchResult" ReturnType="Collection(EthioProductModel.searchResult_Result)">
+      <Parameter Name="search" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tblOrders" EntityType="EthioProductModel.tblOrder" />
+    <EntitySet Name="tblOrderDetails" EntityType="EthioProductModel.tblOrderDetail" />
+    <AssociationSet Name="FK__tblProduc__Catag__4D94879B1" Association="EthioProductModel.FK__tblProduc__Catag__4D94879B1">
+      <End Role="tblCatagory" EntitySet="tblCatagories" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <EntitySet Name="tblCarts" EntityType="EthioProductModel.tblCart" />
+    <AssociationSet Name="FK_tblCart_catagoryId" Association="EthioProductModel.FK_tblCart_catagoryId">
+      <End Role="tblCatagory" EntitySet="tblCatagories" />
+      <End Role="tblCart" EntitySet="tblCarts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCart_ProductId" Association="EthioProductModel.FK_tblCart_ProductId">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblCart" EntitySet="tblCarts" />
+    </AssociationSet>
   </EntityContainer>
+  <ComplexType Name="searchResult_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="CatagoryId" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="ProductImage" Nullable="true" />
+    <Property Type="Boolean" Name="IsFeatured" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+    <Property Type="Int32" Name="CatagoryId1" Nullable="true" />
+    <Property Type="String" Name="CatagoryName" Nullable="true" MaxLength="500" />
+    <Property Type="Boolean" Name="IsActive1" Nullable="true" />
+    <Property Type="Boolean" Name="IsDelete1" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="postalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblOrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailId" />
+    </Key>
+    <Property Name="OrderDetailId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <Association Name="FK__tblProduc__Catag__4D94879B1">
+    <End Type="EthioProductModel.tblCatagory" Role="tblCatagory" Multiplicity="0..1" />
+    <End Type="EthioProductModel.tblProduct" Role="tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCatagory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="CatagoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblCart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="CartId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CatagoryId" Type="Int32" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCatagory" Relationship="EthioProductModel.FK_tblCart_catagoryId" FromRole="tblCart" ToRole="tblCatagory" />
+    <NavigationProperty Name="tblProduct" Relationship="EthioProductModel.FK_tblCart_ProductId" FromRole="tblCart" ToRole="tblProduct" />
+  </EntityType>
+  <Association Name="FK_tblCart_catagoryId">
+    <End Type="EthioProductModel.tblCatagory" Role="tblCatagory" Multiplicity="0..1" />
+    <End Type="EthioProductModel.tblCart" Role="tblCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCatagory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCart">
+        <PropertyRef Name="CatagoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCart_ProductId">
+    <End Type="EthioProductModel.tblProduct" Role="tblProduct" Multiplicity="0..1" />
+    <End Type="EthioProductModel.tblCart" Role="tblCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCart">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

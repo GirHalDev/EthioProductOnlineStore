@@ -14,11 +14,14 @@ namespace EthioProductShoppingCenter.DAL
     
     public partial class tblCart
     {
-        public int CartId { get; set; }
+        public int ID { get; set; }
         public Nullable<int> ProductId { get; set; }
-        public Nullable<int> MemeberId { get; set; }
-        public Nullable<int> CartStatusId { get; set; }
+        public string CartId { get; set; }
+        public Nullable<int> CatagoryId { get; set; }
+        public Nullable<int> Count { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
     
+        public virtual tblCatagory tblCatagory { get; set; }
         public virtual tblProduct tblProduct { get; set; }
     }
 }

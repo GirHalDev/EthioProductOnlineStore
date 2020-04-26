@@ -1,29 +1,50 @@
 ﻿using EthioProductShoppingCenter.DAL;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace EthioProductShoppingCenter.Repository
 {
-    public class GenericRepository<tblEntity> : IRepository<tblEntity> where tblEntity : class
+    public class GenericRepository<tblEntity> : IRepository<tblEntity>, IDisposable where tblEntity : class
     {
-        DbSet<tblEntity> table;
+        internal DbSet<tblEntity> table;
+        //private string _errorMessage = string.Empty;
+        internal bool _isDisposed;
+        //private EthioProductEntities Context;
 
-        private EthioProductEntities dbEntities;
 
-        public GenericRepository(EthioProductEntities _dbEntities)
+
+        public GenericRepository(IGenericUnitOfWork<EthioProductEntities> unitOfWork)
+        :this(unitOfWork.Context)
         {
-            dbEntities = _dbEntities;
-            table = dbEntities.Set<tblEntity>();
         }
+        public GenericRepository(EthioProductEntities _context)
+        {
+            _isDisposed = false;
+            Context = _context;
+            this.table = Context.Set<tblEntity>();
+            
+        }
+        
+
+        public EthioProductEntities Context { get; set; }
+
+        //public virtual IQueryable<tblEntity> Entity
+        //{
+        //    get { return Table; }
+        //}
+        //public virtual DbSet<tblEntity> Table { get; set; } 
+       
 
         public void Add(tblEntity entity)
         {
             table.Add(entity);
-            dbEntities.SaveChanges();
+            Context.SaveChanges();
         }
 
         public IEnumerable<tblEntity> GetProduct()
@@ -77,11 +98,11 @@ namespace EthioProductShoppingCenter.Repository
         {
             if(parameters != null)
             {
-                return dbEntities.Database.SqlQuery<tblEntity>(query, parameters).ToList();
+                return Context.Database.SqlQuery<tblEntity>(query, parameters).ToList();
             }
             else
             {
-                return dbEntities.Database.SqlQuery<tblEntity>(query).ToList();
+                return Context.Database.SqlQuery<tblEntity>(query).ToList();
             }
         }
 
@@ -93,7 +114,7 @@ namespace EthioProductShoppingCenter.Repository
 
         public void Remove(tblEntity entity)
         {
-            if(dbEntities.Entry(entity).State == EntityState.Detached)
+            if(Context.Entry(entity).State == EntityState.Detached)
             {
                 table.Attach(entity);
                 table.Remove(entity);
@@ -120,13 +141,21 @@ namespace EthioProductShoppingCenter.Repository
         public void Update(tblEntity entity)
         {
             table.Attach(entity);
-            dbEntities.Entry(entity).State = EntityState.Modified;
-            dbEntities.SaveChanges();
+            Context.Entry(entity).State = EntityState.Modified;
+            Context.SaveChanges();
+
         }
 
         public void UpdateByWhereClause(System.Linq.Expressions.Expression<Func<tblEntity, bool>> wherePredict, Action<tblEntity> ForEachPredicate)
         {
             table.Where(wherePredict).ToList().ForEach(ForEachPredicate);
+        }
+
+        public void Dispose()
+        {
+            if (Context != null)
+                Context.Dispose();
+            _isDisposed = true;
         }
     }
 }

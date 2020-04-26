@@ -1,4 +1,6 @@
 ﻿@model EthioProductShoppingCenter.Models.Home.HomeIndexViewModel
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "Index";
@@ -68,7 +70,7 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail customDiv">
-                    Catagory 1
+                    Catagory
                     <img class="img-responsive" title="Click to view products" src="~/ProductImg/@item.ProductImage" />
                     <div class="caption">
                         <h5>@item.ProductName</h5>
@@ -81,7 +83,12 @@
                         {
                             <p>Not Avialabl</p>
                         }
-                    
+
+                        @* Product would be added on the layout page cart icon *@
+                        <p class="button">
+                            @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, "")
+                        </p>
+                        @*<a type="button" style="float:right" href="~/ShoppingCart/AddToCart/@item.ID" ><i class="navbar-brand glyphicon glyphicon-shopping-cart"></i></a>*@
                         <div class="product-item-badge">
                             @if (item.IsFeatured == true)
                             {
@@ -94,7 +101,6 @@
 
                         </div>
 
-
                     </div>
                 </div>
             </div>
@@ -102,4 +108,25 @@
 
     </div>
 
+    @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page }))
+
 </div>
+@*@section Scripts {
+
+    <script src="~/Scripts/jquery-3.5.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //count value add up but because it is not posting back the shopping cart is not increasing
+            //ajax call can be a solution.
+            var count = 0;
+            $('.button').click(function (e) {
+                e.preventDefault();
+                count = count + 1;
+
+                $('#lblCartItems').text(count);
+            });
+        });
+    </script>
+}*@
+

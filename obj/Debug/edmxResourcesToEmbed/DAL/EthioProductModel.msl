@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="EthioProductModelStoreContainer" CdmEntityContainer="EthioProductEntities">
-    <EntitySetMapping Name="tblCarts">
-      <EntityTypeMapping TypeName="EthioProductModel.tblCart">
-        <MappingFragment StoreEntitySet="tblCart">
-          <ScalarProperty Name="CartId" ColumnName="CartId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="MemeberId" ColumnName="MemeberId" />
-          <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblCartStatus">
       <EntityTypeMapping TypeName="EthioProductModel.tblCartStatu">
         <MappingFragment StoreEntitySet="tblCartStatus">
@@ -22,7 +12,7 @@
     <EntitySetMapping Name="tblCatagories">
       <EntityTypeMapping TypeName="EthioProductModel.tblCatagory">
         <MappingFragment StoreEntitySet="tblCatagory">
-          <ScalarProperty Name="CatagoryId" ColumnName="CatagoryId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CatagoryName" ColumnName="CatagoryName" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
@@ -56,8 +46,8 @@
     <EntitySetMapping Name="tblProducts">
       <EntityTypeMapping TypeName="EthioProductModel.tblProduct">
         <MappingFragment StoreEntitySet="tblProduct">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="CatagoryId" ColumnName="CatagoryId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -101,6 +91,48 @@
           <ScalarProperty Name="SlideId" ColumnName="SlideId" />
           <ScalarProperty Name="SlideTitle" ColumnName="SlideTitle" />
           <ScalarProperty Name="SlideImage" ColumnName="SlideImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrders">
+      <EntityTypeMapping TypeName="EthioProductModel.tblOrder">
+        <MappingFragment StoreEntitySet="tblOrder">
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrderDetails">
+      <EntityTypeMapping TypeName="EthioProductModel.tblOrderDetail">
+        <MappingFragment StoreEntitySet="tblOrderDetail">
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCarts">
+      <EntityTypeMapping TypeName="EthioProductModel.tblCart">
+        <MappingFragment StoreEntitySet="tblCart">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="CatagoryId" ColumnName="CatagoryId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

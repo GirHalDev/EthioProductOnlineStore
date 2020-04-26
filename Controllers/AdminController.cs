@@ -1,4 +1,5 @@
-﻿using EthioProductShoppingCenter.DAL;
+﻿
+using EthioProductShoppingCenter.DAL;
 using EthioProductShoppingCenter.Models;
 using EthioProductShoppingCenter.Repository;
 using Newtonsoft.Json;
@@ -12,15 +13,15 @@ namespace EthioProductShoppingCenter.Controllers
 {
     public class AdminController : Controller
     {
-        public GenericUnitOfWork unitOfWork = new GenericUnitOfWork();
+        public GenericUnitOfWork<EthioProductEntities> unitOfWork = new GenericUnitOfWork<EthioProductEntities>();
 
         public List<SelectListItem>  GetCatagory()
         {
             List<SelectListItem> lists = new List<SelectListItem>();
-            var catagories = unitOfWork.GetRepositoryInstance<tblCatagory>().GetAllRecords();
+            var catagories = unitOfWork.GenericRepository<tblCatagory>().GetAllRecords();
             foreach (var item in catagories)
             {
-                lists.Add(new SelectListItem { Value = item.CatagoryId.ToString(), Text = item.CatagoryName });
+                lists.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.CatagoryName });
             }
 
             return lists;
@@ -33,7 +34,8 @@ namespace EthioProductShoppingCenter.Controllers
 
         public ActionResult Catagories()
         {
-            List<tblCatagory> allCatagories = unitOfWork.GetRepositoryInstance<tblCatagory>().GetAllRecordsIQueryable().Where(x => x.IsDelete == false).ToList();
+
+            List<tblCatagory> allCatagories = unitOfWork.GenericRepository<tblCatagory>().GetAllRecordsIQueryable().Where(x => x.IsDelete == false).ToList();
             return View(allCatagories);
         }
 
@@ -48,7 +50,7 @@ namespace EthioProductShoppingCenter.Controllers
 
             if (catagoryId != null)
             {
-                cd = JsonConvert.DeserializeObject<CatagoryDetail>(JsonConvert.SerializeObject(unitOfWork.GetRepositoryInstance<tblCatagory>().GetFirstOrDefault(catagoryId)));
+                cd = JsonConvert.DeserializeObject<CatagoryDetail>(JsonConvert.SerializeObject(unitOfWork.GenericRepository<tblCatagory>().GetFirstOrDefault(catagoryId)));
             }
             else
             {
@@ -60,28 +62,28 @@ namespace EthioProductShoppingCenter.Controllers
         //GET: Admin/EditCatagory/catagoryId
         public ActionResult EditCatagory(int catagoryId)
         {
-            return View(unitOfWork.GetRepositoryInstance<tblCatagory>().GetFirstOrDefault(catagoryId));
+            return View(unitOfWork.GenericRepository<tblCatagory>().GetFirstOrDefault(catagoryId));
         }
 
         //POST: Admin/EditCatagory/catagoryId
         [HttpPost]
         public ActionResult EditCatagory(tblCatagory catagory)
         {
-            unitOfWork.GetRepositoryInstance<tblCatagory>().Update(catagory);
+            unitOfWork.GenericRepository<tblCatagory>().Update(catagory);
             return RedirectToAction("Catagories");
         }
 
         //GET: Admin/Product
         public ActionResult Product()
         {
-            return View(unitOfWork.GetRepositoryInstance<tblProduct>().GetProduct());
+            return View(unitOfWork.GenericRepository<tblProduct>().GetProduct());
         }
 
         //GET: Admin/EditProduct/productId
         public ActionResult EditProduct(int productId)
         {
             ViewBag.CatagoryList = GetCatagory();
-            return View(unitOfWork.GetRepositoryInstance<tblProduct>().GetFirstOrDefault(productId));
+            return View(unitOfWork.GenericRepository<tblProduct>().GetFirstOrDefault(productId));
         }
 
         //POST: Admin/EditProduct/productId
@@ -98,7 +100,7 @@ namespace EthioProductShoppingCenter.Controllers
             }
             product.ProductImage = file != null ? pic : product.ProductImage; 
             product.ModifiedDate = DateTime.Now;
-            unitOfWork.GetRepositoryInstance<tblProduct>().Update(product);
+            unitOfWork.GenericRepository<tblProduct>().Update(product);
             return RedirectToAction("Product");
         }
 
@@ -126,7 +128,7 @@ namespace EthioProductShoppingCenter.Controllers
             product.ProductImage = pic;
 
             product.CreatedDate = DateTime.Now;
-            unitOfWork.GetRepositoryInstance<tblProduct>().Add(product);
+            unitOfWork.GenericRepository<tblProduct>().Add(product);
             return RedirectToAction("Product");
         }
     }

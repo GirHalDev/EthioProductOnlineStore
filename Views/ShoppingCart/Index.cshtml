@@ -1,0 +1,140 @@
+﻿@model EthioProductShoppingCenter.Models.ShoppingCart.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.5.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            //$('#myModal').modal('show');
+
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+
+                $.ajax({
+                    url: '/ShoppingCart/RemoveFromCart',
+                    data: { "id": recordToDelete },
+                    method: 'post',
+                    dataType: 'JSON',
+                    success: function (response) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (response.ItemCount == 0) {
+                            $('#row-' + response.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + response.DeleteId).text(response.ItemCount);
+                        }
+                        $('#cart-total').text(response.CartTotal);
+                        $('#update-message').text(response.Message);
+                        $('#cart-status').text('Cart (' + response.CartCount + ')');
+                    }
+                });
+            }
+        });
+       
+    });
+
+     //        // Perform the ajax post
+        //        $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+        //            function (data) {
+        //                // Successful requests get here
+        //                // Update the page elements
+        //                if (data.ItemCount == 0) {
+        //                    $('#row-' + data.DeleteId).fadeOut('slow');
+        //                } else {
+        //                    $('#item-count-' + data.DeleteId).text(data.ItemCount);
+        //                }
+        //                $('#cart-total').text(data.CartTotal);
+        //                $('#update-message').text(data.Message);
+        //                //$('#cart-status').text('Cart (' + data.CartCount + ')');
+        //            });
+        //    }
+</script>
+<h3>
+    <em>Review</em> your cart:
+</h3>
+<p class="button">
+    @Html.ActionLink("Checkout>> ", "AddressAndPayment", "Checkout")
+</p>
+<div id="update-message">
+
+</div>
+@*<input type="hidden" id="hiddenMessage" />
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModal-label">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+<table style="width:100%;height:80px;">
+    <tr style="border-bottom:2px solid grey;background:#808080">
+        <th>
+            Album Name
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.ProductId">
+            <td>
+                @*@Html.ActionLink(item.tblProduct.ProductName, "Details", "Store", new { id = item.ProductId }, null)*@
+                <a id="@item.ProductId" href="#">@item.tblProduct.ProductName</a>
+            </td>
+            <td>
+                @item.tblProduct.Price
+            </td>
+            <td id="item-count-@item.ProductId">
+                @item.Count
+            </td>
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.ProductId">
+                    Remove
+                </a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Total
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>
+
+@*@section Scripts{
+    <script src="~/Scripts/jquery-3.5.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var value = $('#cart-total').text();
+            $('#lblCartItems').text(value);
+        });
+
+    </script>
+}*@

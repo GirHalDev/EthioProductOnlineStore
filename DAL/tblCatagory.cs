@@ -18,14 +18,17 @@ namespace EthioProductShoppingCenter.DAL
         public tblCatagory()
         {
             this.tblProducts = new HashSet<tblProduct>();
+            this.tblCarts = new HashSet<tblCart>();
         }
     
-        public int CatagoryId { get; set; }
+        public int ID { get; set; }
         public string CatagoryName { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblProduct> tblProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCart> tblCarts { get; set; }
     }
 }

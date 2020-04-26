@@ -20,7 +20,7 @@ namespace EthioProductShoppingCenter.DAL
             this.tblCarts = new HashSet<tblCart>();
         }
     
-        public int ProductId { get; set; }
+        public int ID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> CatagoryId { get; set; }
         public Nullable<bool> IsActive { get; set; }
@@ -33,8 +33,8 @@ namespace EthioProductShoppingCenter.DAL
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> Price { get; set; }
     
+        public virtual tblCatagory tblCatagory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCart> tblCarts { get; set; }
-        public virtual tblCatagory tblCatagory { get; set; }
     }
 }

@@ -1,12 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@*@model.EthioProductShoppingCenter.Models.CatagoryDetail*@
+@*@using EthioProductShoppingCenter.Models.Home*@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Ethio Products Shopping Center</title>
+    @*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
     @Styles.Render("~/Content/css")
-    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@ 
+    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,14 +34,19 @@
 
                 <div style="float:right">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>
-
-
-
+                        <li style="display:inline; color:#fff" id="liCartItemTotal"><label id="lblCartItems" for="cart"></label></li>
+                        <!--Shopping cart icon-->
+                        <li><a id="aCart" name="cart" style="color:#fff" href="../ShoppingCart/Index" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>
                         <li>
                             @*glyphiconssource: https://getbootstrap.com/docs/3.3/components/*@
-                            <input style="margin-top:10px" type="text" placeholder="Enter Keyword" /><button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>
-                        </li>            
+                            @*<input style="margin-top:10px" type="text" placeholder="Enter Keyword" /><button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>*@
+                            @using (Html.BeginForm())
+                            {
+                                @*@Html.TextBox("searchTerm", null, new {id = "txtSearch" })*@
+                                <input id="txtSearch" name="searchTerm" style="margin-top:10px;" type="text" placeholder="Enter Keyword" />
+                                <button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>
+                            }
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -52,5 +63,12 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    @*@section Scripts {
+        <script>
+        </script>
+    }*@
+
 </body>
 </html>
+ 
