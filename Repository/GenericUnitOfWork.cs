@@ -8,40 +8,6 @@ using System.Web;
 
 namespace EthioProductShoppingCenter.Repository
 {
-    //public class GenericUnitOfWork : IDisposable
-    //{
-    //    private EthioProductEntities dbEntity = new EthioProductEntities();
-
-    //    public IRepository<tblEntity> GetRepositoryInstance<tblEntity>() where tblEntity : class
-    //    {
-    //        return new GenericRepository<tblEntity>(dbEntity);
-    //    }
-
-    //    public void SaveChanges()
-    //    {
-    //        dbEntity.SaveChanges();
-    //    }
-
-    //    protected virtual void Dispose(bool disposing)
-    //    {
-    //        if(!this.disposed)
-    //        {
-    //            if(disposing)
-    //            {
-    //                dbEntity.Dispose();
-    //            }
-    //        }
-    //        this.disposed = true;
-    //    }
-
-    //    public void Dispose()
-    //    {
-    //        Dispose(true);
-    //        GC.SuppressFinalize(this);
-    //    }
-
-    //    private bool disposed = false;
-    //}
 
     public class GenericUnitOfWork<EthioProductEntities> : IGenericUnitOfWork<EthioProductEntities>, IDisposable where EthioProductEntities : DbContext, new()
     {
@@ -111,18 +77,18 @@ namespace EthioProductShoppingCenter.Repository
                     Context.Dispose();
             _disposed = true;
         }
-        public GenericRepository<T> GenericRepository<T>() where T : class
+        public IGenericRepository<T> GenericRepository<T>() where T : class
         {
             if (_repositories == null)
                 _repositories = new Dictionary<string, object>();
             var type = typeof(T).Name;
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(GenericRepository<T>);
+                var repositoryType = typeof(IGenericRepository<T>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), Context);
                 _repositories.Add(type, repositoryInstance);
             }
-            return (GenericRepository<T>)_repositories[type];
+            return (IGenericRepository<T>)_repositories[type];
         }
 
     }

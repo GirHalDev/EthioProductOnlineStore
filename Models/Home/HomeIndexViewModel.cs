@@ -28,8 +28,6 @@ namespace EthioProductShoppingCenter.Models.Home
             return new HomeIndexViewModel
             {
                 ListOfProducts = data
-
-
             };
         }
     }

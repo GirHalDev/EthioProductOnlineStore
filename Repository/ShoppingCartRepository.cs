@@ -1,22 +1,20 @@
 ﻿using EthioProductShoppingCenter.DAL;
-using EthioProductShoppingCenter.Models.ShoppingCart;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebGrease.Css.Extensions;
 
 namespace EthioProductShoppingCenter.Repository
 {
-    public class ShoppingCartRepository : GenericRepository<tblCart>, IShoppingCart
+    public class ShoppingCartRepository : IGenericRepository<tblCart>, IShoppingCart
     {
         string ShoppingCartId { get; set; }
 
         public const string CartSessionKey = "CartId";
 
-       
+        //Initializing the base class (new GenericRepository(IGenericUnitOfWork<EthioProductEntities> _context))
         public ShoppingCartRepository(IGenericUnitOfWork<EthioProductEntities> unitOfWork)
         : base(unitOfWork)
         {
@@ -193,8 +191,7 @@ namespace EthioProductShoppingCenter.Repository
         // be associated with their username
         public void MigrateCart(string userName)
         {
-            var shoppingCart = Context.tblCarts.Where(
-                c => c.CartId == ShoppingCartId);
+            var shoppingCart = Context.tblCarts.Where(c => c.CartId == ShoppingCartId);
 
             foreach (tblCart item in shoppingCart)
             {

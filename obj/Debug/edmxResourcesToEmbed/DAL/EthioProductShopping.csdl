@@ -58,6 +58,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="EthioProductModel.FK_OrderDetailOrder" FromRole="tblOrder" ToRole="tblOrderDetail" />
   </EntityType>
   <EntityType Name="tblOrderDetail">
     <Key>
@@ -68,6 +69,7 @@
     <Property Name="ProductId" Type="Int32" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tblOrder" Relationship="EthioProductModel.FK_OrderDetailOrder" FromRole="tblOrderDetail" ToRole="tblOrder" />
   </EntityType>
   <EntityType Name="tblProduct">
     <Key>
@@ -171,6 +173,10 @@
       <End Role="tblProduct" EntitySet="tblProducts" />
       <End Role="tblCart" EntitySet="tblCarts" />
     </AssociationSet>
+    <AssociationSet Name="FK_OrderDetailOrder" Association="EthioProductModel.FK_OrderDetailOrder">
+      <End Role="tblOrder" EntitySet="tblOrders" />
+      <End Role="tblOrderDetail" EntitySet="tblOrderDetails" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tblCart">
     <Key>
@@ -206,6 +212,18 @@
       </Principal>
       <Dependent Role="tblCart">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetailOrder">
+    <End Type="EthioProductModel.tblOrder" Role="tblOrder" Multiplicity="0..1" />
+    <End Type="EthioProductModel.tblOrderDetail" Role="tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="tblOrderDetail">
+        <PropertyRef Name="OrderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

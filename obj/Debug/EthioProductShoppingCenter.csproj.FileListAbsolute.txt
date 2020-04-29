@@ -115,4 +115,3 @@ D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\Microso
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\Microsoft.Owin.Security.OAuth.xml
 D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\Microsoft.Owin.Security.Twitter.xml
-D:\ASP.NET MVC\EthioProductShoppingCenter\EthioProductShoppingCenter\bin\AutoMapper.pdb

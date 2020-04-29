@@ -19,5 +19,7 @@ namespace EthioProductShoppingCenter.DAL
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
+    
+        public virtual tblOrder tblOrder { get; set; }
     }
 }

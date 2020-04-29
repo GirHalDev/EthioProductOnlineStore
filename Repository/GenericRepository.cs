@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace EthioProductShoppingCenter.Repository
 {
-    public class GenericRepository<tblEntity> : IRepository<tblEntity>, IDisposable where tblEntity : class
+    public class IGenericRepository<tblEntity> : IRepository<tblEntity>, IDisposable where tblEntity : class
     {
         internal DbSet<tblEntity> table;
         //private string _errorMessage = string.Empty;
@@ -18,12 +18,12 @@ namespace EthioProductShoppingCenter.Repository
         //private EthioProductEntities Context;
 
 
-
-        public GenericRepository(IGenericUnitOfWork<EthioProductEntities> unitOfWork)
+        //Initializing the class itself(new GenericRepository(EthioProductEntities _context))
+        public IGenericRepository(IGenericUnitOfWork<EthioProductEntities> unitOfWork)
         :this(unitOfWork.Context)
         {
         }
-        public GenericRepository(EthioProductEntities _context)
+        public IGenericRepository(EthioProductEntities _context)
         {
             _isDisposed = false;
             Context = _context;
@@ -39,6 +39,11 @@ namespace EthioProductShoppingCenter.Repository
         //    get { return Table; }
         //}
         //public virtual DbSet<tblEntity> Table { get; set; } 
+        public tblEntity GetInstance()
+        {
+
+            return table.Create();
+        }
        
 
         public void Add(tblEntity entity)

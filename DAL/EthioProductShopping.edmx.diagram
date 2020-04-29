@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="EthioProductModel.tblCart" Width="1.5" PointX="10.25" PointY="1.625" />
         <AssociationConnector Association="EthioProductModel.FK_tblCart_catagoryId" />
         <AssociationConnector Association="EthioProductModel.FK_tblCart_ProductId" />
+        <AssociationConnector Association="EthioProductModel.FK_OrderDetailOrder" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

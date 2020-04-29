@@ -13,6 +13,8 @@ using EthioProductShoppingCenter.Models.ShoppingCart;
 
 namespace EthioProductShoppingCenter.Controllers
 {
+    //Rerouting Http request to Https
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index(string searchTerm, int?page)

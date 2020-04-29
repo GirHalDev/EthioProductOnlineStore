@@ -6,8 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using EthioProductShoppingCenter.Models;
+using EthioProductShoppingCenter;
 
-namespace EthioProductShoppingCenter.App_Start
+namespace EthioProductShoppingCenter
 {
     public partial class Startup
     {
@@ -58,11 +59,11 @@ namespace EthioProductShoppingCenter.App_Start
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1019894512349-gib5mq7p5nbqv416nnk9n2eeu7qqff62.apps.googleusercontent.com",
+                ClientSecret = "qlaFNZVymiZoEVS07SdnhKnC"
+            });
         }
     }
 }

@@ -9,9 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EthioProductShoppingCenter.Models;
+using EthioProductShoppingCenter.Repository;
+
 
 namespace EthioProductShoppingCenter.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -27,7 +30,14 @@ namespace EthioProductShoppingCenter.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
+        public void MigrateShoppingCart(string UserName)
+        {
+            //Associate shopping cart items with logged-in user
+            var cart = ShoppingCartRepository.GetCart(this.HttpContext);
 
+            cart.MigrateCart(UserName);
+            Session[ShoppingCartRepository.CartSessionKey] = UserName;
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -76,6 +86,7 @@ namespace EthioProductShoppingCenter.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            MigrateShoppingCart(model.Email);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,6 +166,7 @@ namespace EthioProductShoppingCenter.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    MigrateShoppingCart(model.Email);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -469,6 +481,7 @@ namespace EthioProductShoppingCenter.Controllers
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }
             public string UserId { get; set; }
+            
 
             public override void ExecuteResult(ControllerContext context)
             {
@@ -479,6 +492,8 @@ namespace EthioProductShoppingCenter.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+
+            
         }
         #endregion
     }

@@ -14,6 +14,12 @@ namespace EthioProductShoppingCenter.DAL
     
     public partial class tblOrder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblOrder()
+        {
+            this.tblOrderDetails = new HashSet<tblOrderDetail>();
+        }
+    
         public int OrderId { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
@@ -27,5 +33,8 @@ namespace EthioProductShoppingCenter.DAL
         public string Email { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
     }
 }

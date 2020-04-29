@@ -13,14 +13,14 @@ namespace EthioProductShoppingCenter.Controllers
     public class ShoppingCartController : Controller
     {
         private GenericUnitOfWork<EthioProductEntities> uow = new GenericUnitOfWork<EthioProductEntities>();
-        private GenericRepository<tblCart> repositoryCart;
-        private GenericRepository<tblProduct> repositoryProduct;
+        private IGenericRepository<tblCart> repositoryCart;
+        private IGenericRepository<tblProduct> repositoryProduct;
         private IShoppingCart shoppingCartRepository;
         public ShoppingCartController()
         {
             //If you want to use Generic Repository with Unit of work
-            repositoryCart = new GenericRepository<tblCart>(uow);
-            repositoryProduct = new GenericRepository<tblProduct>(uow);
+            repositoryCart = new IGenericRepository<tblCart>(uow);
+            repositoryProduct = new IGenericRepository<tblProduct>(uow);
             //If you want to use Specific Repository with Unit of work
             shoppingCartRepository = new ShoppingCartRepository(uow);
         }
