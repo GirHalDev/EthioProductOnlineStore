@@ -91,7 +91,7 @@ namespace EthioProductShoppingCenter.Repository
         {
             //ShoppingCartId = GetCartId();
             //// Get the cart
-            var cartItem = Context.tblCarts.Single(cart => cart.CartId == cartIds
+            var cartItem = Context.tblCarts.FirstOrDefault(cart => cart.CartId == cartIds
                 && cart.ProductId == id);
             //var cartItem = uow.GetRepositoryInstance<tblCart>().GetFirstOrDefault(id);
 
@@ -157,7 +157,7 @@ namespace EthioProductShoppingCenter.Repository
         public int CreateOrder(tblOrder order)
         {
             decimal orderTotal = 0;
-
+            
             var cartItems = GetCartItem();
             // Iterate over the items in the cart, 
             // adding the order details for each
@@ -172,9 +172,16 @@ namespace EthioProductShoppingCenter.Repository
                 };
                 // Set the order total of the shopping cart
                 orderTotal += (decimal)(item.Count * item.tblProduct.Price);
-
+                
                 Context.tblOrderDetails.Add(orderDetail);
 
+                //int? Quantity = orderDetail.Quantity;
+                //Quantity = Quantity - 1;
+                //if(Quantity == 0)
+                //{
+                //    break;
+                //}
+               
             }
             // Set the order's total to the orderTotal count
             order.Total = orderTotal;

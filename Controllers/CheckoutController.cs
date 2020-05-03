@@ -37,20 +37,31 @@ namespace EthioProductShoppingCenter.Controllers
         [HttpPost]
         public ActionResult AddressAndPayment(FormCollection values)
         {
-            //List<OrderVM> orderVM = new List<OrderVM>();
-            //List<tblOrder> order = uow.Context.tblOrders.ToList();
-
-            //Mapper.Map<List<OrderVM>, List<tblOrder>>(orderVM);
-            OrderVM orderVM = new OrderVM();
-            tblOrder order = new tblOrder();
-            
-            Mapper.Map<tblOrder, OrderVM>(order);
-            //var order = new OrderVM();
-
-            TryUpdateModel(order);
-
             try
             {
+                OrderVM orderVM = new OrderVM();
+                TryUpdateModel(orderVM);
+
+                tblOrder order = new tblOrder();
+
+                order.Username = orderVM.Username;
+                order.FirstName = orderVM.FirstName;
+                order.LastName = orderVM.LastName;
+                order.Address = orderVM.Address;
+                order.City = orderVM.City;
+                order.State = orderVM.State;
+                order.postalCode = orderVM.postalCode;
+                order.Country = orderVM.Country;
+                order.Phone = orderVM.Phone;
+                order.Email = orderVM.Email;
+                order.Total = orderVM.Total;
+                order.OrderDate = orderVM.OrderDate;
+
+
+                Mapper.Map<tblOrder, OrderVM>(order);
+
+                //var order = new OrderVM();
+
                 if (string.Equals(values["PromoCode"], PromoCode, StringComparison.OrdinalIgnoreCase) == false)
                 {
                     return View(orderVM);
@@ -71,14 +82,15 @@ namespace EthioProductShoppingCenter.Controllers
                     cart.CreateOrder(order);
                     return RedirectToAction("Complete", new { id = order.OrderId });
                 }
+
             }
             catch
             {
                 //Invalid - redisplay with errors
-                return View(orderVM);
+                return View("Error");
             }
 
-        }
+    }
 
         //Get: /Checkout/Complete
         public ActionResult Complete(int id)

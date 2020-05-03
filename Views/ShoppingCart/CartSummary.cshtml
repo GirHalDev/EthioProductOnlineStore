@@ -1,0 +1,6 @@
+﻿@*@Html.ActionLink("Cart (" + ViewData["CartCount"] + ")", "Index", "ShoppingCart", new { id = "cart-status" })*@
+
+@*<li style="display:inline; color:#fff" id="liCartItemTotal"></li>*@
+<label id="cart-status" style="display:inline; color:#fff" for="cart">@ViewData["CartCount"]</label>
+    <!--Shopping cart icon-->
+<li><a name="cart" href="../ShoppingCart/Index" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>

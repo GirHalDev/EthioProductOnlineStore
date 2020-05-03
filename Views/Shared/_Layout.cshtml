@@ -34,9 +34,10 @@
 
                 <div style="float:right">
                     <ul class="nav navbar-nav">
-                        <li style="display:inline; color:#fff" id="liCartItemTotal"><label id="lblCartItems" for="cart"></label></li>
+                        @*<li style="display:inline; color:#fff" id="liCartItemTotal"><label id="lblCartItems" for="cart"></label></li>*@
                         <!--Shopping cart icon-->
-                        <li><a id="aCart" name="cart" style="color:#fff" href="../ShoppingCart/Index" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>
+                        @*<li><a id="aCart" name="cart" style="color:#fff" href="../ShoppingCart/Index" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>*@
+                        <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                         <li>
                             @*glyphiconssource: https://getbootstrap.com/docs/3.3/components/*@
                             @*<input style="margin-top:10px" type="text" placeholder="Enter Keyword" /><button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>*@

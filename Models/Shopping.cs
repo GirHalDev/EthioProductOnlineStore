@@ -76,7 +76,8 @@ namespace EthioProductShoppingCenter.Models
         //{
         //    context = _context;
         //}
-
+        //private string name;
+       
         [Key]
         [ScaffoldColumn(false)]
         public int OrderId { get; set; } 
@@ -132,5 +133,20 @@ namespace EthioProductShoppingCenter.Models
         public Nullable<System.DateTime> OrderDate { get; set; }
 
         public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
+
+        //public string this[string name]
+        //{
+        //    get
+        //    {
+        //        return name;
+        //    }
+
+        //    set
+        //    {
+        //        name = value;
+        //    }
+        //}
+
+
     }
 }
