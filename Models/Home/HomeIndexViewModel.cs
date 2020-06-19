@@ -24,6 +24,7 @@ namespace EthioProductShoppingCenter.Models.Home
         public HomeIndexViewModel CreateModel(string searchTerm, int pageSize, int? page)
         {
             SqlParameter[] param = new SqlParameter[] { new SqlParameter("@search", searchTerm??(object)DBNull.Value)};
+            //The Stored procedure name is searchResult and the input parameter name is @search on the database
             IPagedList<tblProduct> data = dbContext.Database.SqlQuery<tblProduct>("searchResult @search", param).ToList().ToPagedList(page ?? 1, pageSize);
             return new HomeIndexViewModel
             {

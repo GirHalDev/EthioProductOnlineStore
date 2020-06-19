@@ -18,8 +18,17 @@ namespace EthioProductShoppingCenter.Models.ShoppingCart
         //IShoppingCart cart;
         [Key]
         public int Id { get; set; }
-        public List<tblCart> CartItems;
-        public decimal CartTotal;
+        public List<tblCart> CartItems { get; set; }
+        public decimal CartTotal { get; set; }
+
+        public decimal Amount { get; set; }
+        //public tblProduct ProductName { get; set; }
+
+        //public tblProduct Price { get; set; }
+
+        //public tblProduct Quantity { get; set; }
+
+
 
         //public List<tblCart> cartItems;
         //public decimal cartTotal;

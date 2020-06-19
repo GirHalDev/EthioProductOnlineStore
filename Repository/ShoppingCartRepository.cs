@@ -1,18 +1,21 @@
 ﻿using EthioProductShoppingCenter.DAL;
 using Microsoft.Ajax.Utilities;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace EthioProductShoppingCenter.Repository
 {
-    public class ShoppingCartRepository : IGenericRepository<tblCart>, IShoppingCart
+    public class ShoppingCartRepository : GenericRepository<tblCart>, IShoppingCart
     {
         string ShoppingCartId { get; set; }
 
         public const string CartSessionKey = "CartId";
+        //private int index;
 
         //Initializing the base class (new GenericRepository(IGenericUnitOfWork<EthioProductEntities> _context))
         public ShoppingCartRepository(IGenericUnitOfWork<EthioProductEntities> unitOfWork)
@@ -24,8 +27,6 @@ namespace EthioProductShoppingCenter.Repository
         : base(context)
         {
         }
-
-       
 
 
         public static ShoppingCartRepository GetCart(HttpContextBase value)
@@ -144,6 +145,7 @@ namespace EthioProductShoppingCenter.Repository
         }
         public decimal GetTotal()
         {
+            ShoppingCartId = GetCartId();
             // Multiply album price by count of that album to get 
             // the current price for each of those albums in the cart
             // sum all album price totals to get the cart total
@@ -211,5 +213,19 @@ namespace EthioProductShoppingCenter.Repository
         {
             throw new NotImplementedException();
         }
+
+
+
+        //public int this[int Index] 
+        //{ 
+        //    get
+        //    {
+        //        return index;
+        //    }
+        //    set
+        //    {
+        //        Index = value;
+        //    }
+        //}
     }
 }

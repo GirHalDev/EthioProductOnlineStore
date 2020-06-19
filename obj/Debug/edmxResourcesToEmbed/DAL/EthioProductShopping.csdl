@@ -59,6 +59,8 @@
     <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="OrderDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblOrderDetails" Relationship="EthioProductModel.FK_OrderDetailOrder" FromRole="tblOrder" ToRole="tblOrderDetail" />
+    <Property Name="PaymentTranID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HasBeenShipped" Type="Boolean" />
   </EntityType>
   <EntityType Name="tblOrderDetail">
     <Key>
@@ -86,7 +88,7 @@
     <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="IsFeatured" Type="Boolean" />
     <Property Name="Quantity" Type="Int32" />
-    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="tblCatagory" Relationship="Self.FK__tblProduc__Catag__4D94879B" FromRole="tblProduct" ToRole="tblCatagory" />
     <NavigationProperty Name="tblCarts" Relationship="EthioProductModel.FK_tblCart_ProductId" FromRole="tblProduct" ToRole="tblCart" />
   </EntityType>

@@ -46,6 +46,8 @@
     <EntitySetMapping Name="tblOrders">
       <EntityTypeMapping TypeName="EthioProductModel.tblOrder">
         <MappingFragment StoreEntitySet="tblOrder">
+          <ScalarProperty Name="HasBeenShipped" ColumnName="HasBeenShipped" />
+          <ScalarProperty Name="PaymentTranID" ColumnName="PaymentTranID" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />

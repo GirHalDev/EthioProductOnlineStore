@@ -71,6 +71,8 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="OrderDate" Type="datetime" />
+          <Property Name="PaymentTranID" Type="nvarchar(max)" />
+          <Property Name="HasBeenShipped" Type="bit" />
         </EntityType>
         <EntityType Name="tblOrderDetail">
           <Key>
@@ -97,7 +99,7 @@
           <Property Name="ProductImage" Type="varchar(max)" />
           <Property Name="IsFeatured" Type="bit" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="Price" Type="money" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="tblRoles">
           <Key>
@@ -285,6 +287,8 @@
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblOrderDetails" Relationship="EthioProductModel.FK_OrderDetailOrder" FromRole="tblOrder" ToRole="tblOrderDetail" />
+          <Property Name="PaymentTranID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HasBeenShipped" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblOrderDetail">
           <Key>
@@ -312,7 +316,7 @@
           <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsFeatured" Type="Boolean" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tblCatagory" Relationship="Self.FK__tblProduc__Catag__4D94879B" FromRole="tblProduct" ToRole="tblCatagory" />
           <NavigationProperty Name="tblCarts" Relationship="EthioProductModel.FK_tblCart_ProductId" FromRole="tblProduct" ToRole="tblCart" />
         </EntityType>
@@ -504,6 +508,8 @@
           <EntitySetMapping Name="tblOrders">
             <EntityTypeMapping TypeName="EthioProductModel.tblOrder">
               <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="HasBeenShipped" ColumnName="HasBeenShipped" />
+                <ScalarProperty Name="PaymentTranID" ColumnName="PaymentTranID" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

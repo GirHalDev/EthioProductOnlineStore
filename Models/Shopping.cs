@@ -40,44 +40,6 @@ namespace EthioProductShoppingCenter.Models
 
     public partial class OrderVM 
     {
-        //tblOrder order;
-
-        //public OrderVM()
-        //{
-
-        //}
-
-        //public OrderVM(tblOrder order)
-        //: base()
-        //{
-        //    OrderId = order.OrderId;
-        //    Username = order.Username;
-        //    FirstName = order.FirstName;
-        //    LastName = order.LastName;
-        //    Address = order.Address;
-        //    City = order.City;
-        //    State = order.State;
-        //    postalCode = order.postalCode;
-        //    Country = order.Country;
-        //    Phone = order.Phone;
-        //    Email = order.Email;
-        //    Total = order.Total;
-        //    OrderDate = order.OrderDate;
-
-        //}
-
-        //IGenericUnitOfWork<EthioProductEntities> unitOfWork = new GenericUnitOfWork<EthioProductEntities>();
-        //EthioProductEntities context;
-        //public OrderVM()
-        //{
-        //}
-
-        //public OrderVM(EthioProductEntities _context)
-        //{
-        //    context = _context;
-        //}
-        //private string name;
-       
         [Key]
         [ScaffoldColumn(false)]
         public int OrderId { get; set; } 
@@ -132,20 +94,7 @@ namespace EthioProductShoppingCenter.Models
         [ScaffoldColumn(false)]
         public Nullable<System.DateTime> OrderDate { get; set; }
 
-        public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
-
-        //public string this[string name]
-        //{
-        //    get
-        //    {
-        //        return name;
-        //    }
-
-        //    set
-        //    {
-        //        name = value;
-        //    }
-        //}
+        //public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
 
 
     }

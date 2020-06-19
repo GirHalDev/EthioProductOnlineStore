@@ -23,6 +23,18 @@ textarea {
     max-width: 280px;
 }
 
+#divNavMobile{
+    display:none;
+}
+
+#navCollapseLeft {
+    display: none;
+}
+
+#mobView {
+    display: none;
+}
+
 
 
 

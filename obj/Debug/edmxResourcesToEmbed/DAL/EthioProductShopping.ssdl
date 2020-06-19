@@ -66,6 +66,8 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
     <Property Name="OrderDate" Type="datetime" />
+    <Property Name="PaymentTranID" Type="nvarchar(max)" />
+    <Property Name="HasBeenShipped" Type="bit" />
   </EntityType>
   <EntityType Name="tblOrderDetail">
     <Key>
@@ -92,7 +94,7 @@
     <Property Name="ProductImage" Type="varchar(max)" />
     <Property Name="IsFeatured" Type="bit" />
     <Property Name="Quantity" Type="int" />
-    <Property Name="Price" Type="money" />
+    <Property Name="Price" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblRoles">
     <Key>

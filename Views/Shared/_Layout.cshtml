@@ -1,5 +1,4 @@
-﻿@*@model.EthioProductShoppingCenter.Models.CatagoryDetail*@
-@*@using EthioProductShoppingCenter.Models.Home*@
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +11,78 @@
     @Styles.Render("~/Content/css")
     @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/mobile.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#btnToggle').click(function () {
+                //$('#divNavMobile').width('50%');
+                let value = $('#divNavMobile').width();
+                //alert(value);
+                if (value == 0) {
+                    //alert('button clicked' + value);
+                    $('#divNavMobile').width('50%');
+                    //$('#divNavMobile').height('100%');
+                    //$('#navCollapseRight').attr('display', 'none');
+
+                }
+                else {
+                    //alert('button clicked' + value);
+                    $('#divNavMobile').width('0');
+                    //$('#divNavMobile').height('50px');
+
+                }
+
+            });
+
+            $('#btnSearchPop').click(function () {
+
+                 
+                if($('#formSearch').css('display', 'none')) {
+                    $('#formSearch').css('display', 'block');
+                    $('#navCollapseLeft').css('display', 'none');
+                }
+                else {
+                    $('#formSearch').css('display', 'none');
+                    $('#navCollapseLeft').css('display', 'block');
+                }
+
+            });
+
+        });
+
+       
+    </script>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <form id="formSearch" class="nav navbar-fixed-top" style="display:none; margin:10px;">
+        @*style = "display:block; width:0"*@
+        <input name="searchTerm" type="text" placeholder="Enter Keyword" />
+        <button style="margin-left:0px" title="Search & Back">&#128269;</button>
+    </form>
+    <div id="navCollapseLeft" class="nav navbar-fixed-top">
+
+        <ul class="nav">
+            <li>@Html.ActionLink("Ethio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+           
+            @{Html.RenderAction("CartSummary", "ShoppingCart");}
+            <li style="margin-left:200px; display:inline"><button style="margin-top:5px" id="btnSearchPop">&#128269;</button></li>
+
+            <li style="display:inline"><button id="btnToggle" class="btn pull-right fixed-top"> &#9776;</button></li>
+        </ul>
+
+    </div>
+    <div id="divNavMobile">
+        <ul class="nav navbar-nav" style="margin-top:50px;">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.Partial("_LoginPartial")</li>
+        </ul>
+    </div>
+    <div id="divNavNormal" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,7 +90,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*<a style="display:inline" href="/Home/index">Ethio</a>*@
+                @Html.ActionLink("Ethio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -34,23 +102,20 @@
 
                 <div style="float:right">
                     <ul class="nav navbar-nav">
-                        @*<li style="display:inline; color:#fff" id="liCartItemTotal"><label id="lblCartItems" for="cart"></label></li>*@
-                        <!--Shopping cart icon-->
-                        @*<li><a id="aCart" name="cart" style="color:#fff" href="../ShoppingCart/Index" class="navbar-brand glyphicon glyphicon-shopping-cart" target="_blank"></a></li>*@
+
                         <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                         <li>
-                            @*glyphiconssource: https://getbootstrap.com/docs/3.3/components/*@
-                            @*<input style="margin-top:10px" type="text" placeholder="Enter Keyword" /><button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>*@
+
                             @using (Html.BeginForm())
                             {
-                                @*@Html.TextBox("searchTerm", null, new {id = "txtSearch" })*@
                                 <input id="txtSearch" name="searchTerm" style="margin-top:10px;" type="text" placeholder="Enter Keyword" />
-                                <button style="border-left:0px"><span class="glyphicon glyphicon-search"></span></button>
+                                <button style="border-left:0px">&#128269;</button>
                             }
                         </li>
+
                         @Html.Partial("_LoginPartial")
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
@@ -66,11 +131,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
-    @*@section Scripts {
-        <script>
-        </script>
-    }*@
 
 </body>
 </html>

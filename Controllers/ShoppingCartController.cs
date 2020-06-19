@@ -13,14 +13,14 @@ namespace EthioProductShoppingCenter.Controllers
     public class ShoppingCartController : Controller
     {
         private GenericUnitOfWork<EthioProductEntities> uow = new GenericUnitOfWork<EthioProductEntities>();
-        private IGenericRepository<tblCart> repositoryCart;
-        private IGenericRepository<tblProduct> repositoryProduct;
+        private IRepository<tblCart> repositoryCart;
+        private IRepository<tblProduct> repositoryProduct;
         private IShoppingCart shoppingCartRepository;
         public ShoppingCartController()
         {
             //If you want to use Generic Repository with Unit of work
-            repositoryCart = new IGenericRepository<tblCart>(uow);
-            repositoryProduct = new IGenericRepository<tblProduct>(uow);
+            repositoryCart = new GenericRepository<tblCart>(uow);
+            repositoryProduct = new GenericRepository<tblProduct>(uow);
             //If you want to use Specific Repository with Unit of work
             shoppingCartRepository = new ShoppingCartRepository(uow);
         }
@@ -28,15 +28,51 @@ namespace EthioProductShoppingCenter.Controllers
         // GET: /ShoppingCart/
         public ActionResult Index()
         {
+            
             var cart = ShoppingCartRepository.GetCart(this.HttpContext);
             var viewmodel = new ShoppingCartViewModel
             {
                 CartItems = cart.GetCartItem(),
-                CartTotal = cart.GetCount()
+                CartTotal = cart.GetCount(),
+                Amount = cart.GetTotal()
             };
+
+            //string.Format("{0:F2}", viewmodel.CartTotal);
+            List<tblCart> shCart = viewmodel.CartItems;
+            Session["cart"] = shCart;
 
             ViewBag.CartItemsSum = viewmodel.CartTotal;
 
+            string paymentAmt = viewmodel.Amount.ToString();
+            Session["payment_amt"] = paymentAmt;
+
+            
+
+
+            string name;
+            decimal? eachPrice;
+            int? quantity;
+            int? prodID;
+
+            foreach (var item in shCart)
+            {
+                name = item.tblProduct.ProductName;
+                eachPrice = item.tblProduct.Price;
+                quantity = item.Count;
+                prodID = item.ProductId;
+
+                Session["eachprodprice"] = eachPrice;
+                Session["name"] = name;
+                Session["quantity"] = quantity;
+                Session["productID"] = prodID;
+            }
+
+            //IEnumerable<decimal?> totPriceOfEachProd += eachPrice 
+            //IEnumerable<string> name = cart.GetProduct().Select(x => x.tblProduct.ProductName);
+            //List<tblCart> shCart = viewmodel.CartItems;
+            //IEnumerable<int?> quantity = cart.GetProduct().Select(x => x.tblProduct.Quantity);
+           
+            
             return View(viewmodel);
 
         }

@@ -33,6 +33,8 @@ namespace EthioProductShoppingCenter.DAL
         public string Email { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
+        public string PaymentTranID { get; set; }
+        public Nullable<bool> HasBeenShipped { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }

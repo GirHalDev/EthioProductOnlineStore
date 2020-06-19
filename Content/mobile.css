@@ -1,0 +1,41 @@
+﻿@media only screen and (max-width: 768px) {
+    
+    #divNavNormal {
+        display: none;
+    }
+
+    #divNavMobile {
+        position: fixed;
+        /* streched 250px using script */
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+        cursor: pointer;
+        text-align: center;
+        overflow: hidden;
+        transition: 0.5s;
+        display:block;
+        margin-top:50px;
+    }
+
+    #navCollapseLeft {
+        display: block;
+    }
+
+    #divNavMobile a{
+        display:block;
+        text-align:center;
+    }
+
+    #navCollapseLeft li {
+        display:inline;
+        margin-top:0;
+    }
+
+
+}

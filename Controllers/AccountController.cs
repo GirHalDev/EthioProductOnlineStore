@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EthioProductShoppingCenter.Models;
 using EthioProductShoppingCenter.Repository;
-
+using Unity;
 
 namespace EthioProductShoppingCenter.Controllers
 {
@@ -25,6 +25,7 @@ namespace EthioProductShoppingCenter.Controllers
         {
         }
 
+        [InjectionConstructor]
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
