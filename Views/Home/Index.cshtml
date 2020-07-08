@@ -1,10 +1,12 @@
 ﻿@model EthioProductShoppingCenter.Models.Home.HomeIndexViewModel
 @using PagedList.Mvc;
 @using PagedList;
+ 
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
@@ -72,10 +74,10 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail" style="text-align:center">
-                    Catagory
+                   atagory
                     <div style="height:210px; width:100%">
                         <img class="img-responsive" style="height:inherit; width:inherit" title="Click to view products" src="~/Images/@item.ProductImage" />
-                    </div>                
+                    </div>
                     <div class="caption">
                         <h5>@item.ProductName</h5>
                         <p>$@item.Price</p>

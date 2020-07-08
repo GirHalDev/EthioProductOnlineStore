@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace EthioProductShoppingCenter.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public GenericUnitOfWork<EthioProductEntities> unitOfWork = new GenericUnitOfWork<EthioProductEntities>();

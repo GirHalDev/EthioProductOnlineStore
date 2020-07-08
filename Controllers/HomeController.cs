@@ -42,6 +42,7 @@ namespace EthioProductShoppingCenter.Controllers
         //    return Json(pro, JsonRequestBehavior.AllowGet.ToString());
         //}
 
+        [Authorize(Roles = "Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
