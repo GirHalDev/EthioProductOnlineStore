@@ -15,5 +15,6 @@ namespace EthioProductShoppingCenter.Repository
         void Commit();
         void Rollback();
         void Save();
+       
     }
 }

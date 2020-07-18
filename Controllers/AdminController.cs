@@ -25,6 +25,7 @@ namespace EthioProductShoppingCenter.Controllers
                 lists.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.CatagoryName });
             }
 
+            
             return lists;
         }
         // GET: Admin

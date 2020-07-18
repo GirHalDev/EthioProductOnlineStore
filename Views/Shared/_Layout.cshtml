@@ -8,6 +8,7 @@
     @*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
         <script src="~/Scripts/jquery-3.4.1.js"></script>
         <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+    @*Styles a Helper class to render css*@
     @Styles.Render("~/Content/css")
     @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@
     @Scripts.Render("~/bundles/modernizr")
@@ -76,12 +77,19 @@
     </div>
     <div id="divNavMobile">
         <ul class="nav navbar-nav" style="margin-top:50px;">
-            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("About", "About", "Home")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+            @*A drop down cascade for catatgory and product*@
+            <li>@Html.ActionLink("Product", "Index", "Home")</li>
+
+            @if (User.IsInRole("Admin") == true)
+            {
+                <li>@Html.ActionLink("Admin", "DashBoard", "Admin", new { id = "adminLink" })</li>
+            }
             <li>@Html.Partial("_LoginPartial")</li>
         </ul>
     </div>
+    
+    <!--The above code is for Mobile view side nav overlay -->
     <div id="divNavNormal" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -95,9 +103,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    @*A drop down cascade for catatgory and product*@
+                    <li>@Html.ActionLink("Product", "Index", "Home")</li>
+                    @if(User.IsInRole("Admin") == true)
+                    {
+                        <li>@Html.ActionLink("Admin", "DashBoard", "Admin", new { id = "adminLink" })</li>
+                    }
+
                 </ul>
 
                 <div style="float:right">
@@ -123,7 +136,34 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="nav navbar" id="divFooter">
+            <div class="row" >
+                <div class="col-md-4 col-xs-12">
+                    @Html.ActionLink("About", "About", "Home")
+                    <p>
+                       sgfgahuhfl bakfjenejhlij bklrgjlj.fme
+                        vdahefk dgjygefkhkDYW KFK,ENFJ
+                        kjvldahlula jsfjhkjr,n l,dnf.fm.
+                        B,jnvjvnlv nf,NEDLJEF L,ND,N,SSS
+                        F,N,DNVLN FJVN,JNLN ,NF,FN,N,F ,
+                    </p>
+
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    @Html.ActionLink("Contact Us", "Contact", "Home")
+                    <p>
+                        sgfgahuhfl bakfjenejhlij bklrgjlj.fme
+                        vdahefk dgjygefkhkDYW KFK,ENFJ BKMMc
+                        bmcs, bfbkhke bmdk
+                    </p>
+
+                </div>
+                <div class="col-md-4 col-xs-12 pull-right">
+                    <h4>Social Media</h4>
+
+                </div>
+
+            </div>
             <p>&copy; @DateTime.Now.Year - Ethio Products</p>
         </footer>
     </div>

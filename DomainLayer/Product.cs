@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,7 +14,10 @@ namespace EthioProductShoppingCenter.DomainLayer
 
         [Required(ErrorMessage = "Product name is needed!")]
         public string ProductName { get; set; }
+
+        [ForeignKey("tblCatagory")]
         public Nullable<int> CatagoryId { get; set; }
+        [ScaffoldColumn(false)]
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using EthioProductShoppingCenter.Repository;
 
 namespace EthioProductShoppingCenter.Repository
 {
@@ -32,6 +33,8 @@ namespace EthioProductShoppingCenter.Repository
         public EthioProductEntities Context { get; }
 
         public IGenericUnitOfWork<DAL.EthioProductEntities> context => throw new NotImplementedException();
+
+        public object EthioproductShoppingCenter { get; private set; }
 
         //EthioProductEntities IGenericUnitOfWork<EthioProductEntities>.Context => throw new NotImplementedException();
 
@@ -84,7 +87,7 @@ namespace EthioProductShoppingCenter.Repository
             var type = typeof(T).Name;
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(GenericRepository<T>);
+                Type repositoryType = Type.GetType("EthioProductShoppingCenter.Repository.GenericRepository`1");
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), Context);
                 _repositories.Add(type, repositoryInstance);
             }

@@ -10,13 +10,19 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using EthioProductShoppingCenter.Models.ShoppingCart;
+using EthioProductShoppingCenter.DomainLayer;
+using EthioProductShoppingCenter.BusinessLogic;
 
 namespace EthioProductShoppingCenter.Controllers
 {
+
     //Rerouting Http request to Https
     [RequireHttps]
     public class HomeController : Controller
     {
+        
+       
+                
         public ActionResult Index(string searchTerm, int?page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
@@ -25,24 +31,16 @@ namespace EthioProductShoppingCenter.Controllers
             return View(model.CreateModel(searchTerm, 4, page));        
         }
 
-        //public decimal CartItemCount()
-        //{
-        //    IShoppingCart vm = null;
-        //    return vm.GetCount();
-        //}
+        public ActionResult GetProduct(int id)
+        {
+
+            ProductLogic proLogic = new ProductLogic();
+            Product pro = proLogic.GetProduct(id);
+
+            return View(pro);
+        }
 
 
-        //Autocomplete jquery widget for search
-        //public JsonResult GetProduct(string term)
-        //{
-        //    EthioProductEntities dbEntity = new EthioProductEntities();
-
-        //    List<string> pro = dbEntity.tblProducts.Where(x => x.ProductName.StartsWith(term)).Select(y => y.ProductName).ToList();
-
-        //    return Json(pro, JsonRequestBehavior.AllowGet.ToString());
-        //}
-
-        [Authorize(Roles = "Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

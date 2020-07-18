@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<EthioProductShoppingCenter.DAL.tblCatagory>
 
+
 @{
     ViewBag.Title = "Catagories";
     Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
@@ -29,8 +30,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.CatagoryName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
+        <td>          
+            @Html.DisplayFor(modelItem => item.IsActive)           
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDelete)

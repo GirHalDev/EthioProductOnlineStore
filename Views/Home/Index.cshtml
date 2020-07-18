@@ -1,7 +1,7 @@
 ﻿@model EthioProductShoppingCenter.Models.Home.HomeIndexViewModel
 @using PagedList.Mvc;
 @using PagedList;
- 
+
 
 @{
     ViewBag.Title = "Index";
@@ -11,7 +11,7 @@
 
 @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
 @*<script src="~/Scripts/bootstrap.min.js"></script>*@
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
 <div class="container">
     <div class="row">
         <div>
@@ -70,54 +70,64 @@
         <hr />
     </div>
     <div class="row">
-        @foreach (var item in Model.ListOfProducts)
-        {
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="thumbnail" style="text-align:center">
-                   atagory
-                    <div style="height:210px; width:100%">
-                        <img class="img-responsive" style="height:inherit; width:inherit" title="Click to view products" src="~/Images/@item.ProductImage" />
-                    </div>
-                    <div class="caption">
-                        <h5>@item.ProductName</h5>
-                        <p>$@item.Price</p>
-                        @if (item.Quantity > 0)
-                        {
-                            <p>Available</p>
-                        }
-                        else
-                        {
-                            <p>Not Avialabl</p>
-                        }
-                        @*<a type="button" style="float:right" href="~/ShoppingCart/AddToCart/@item.ID" ><i class="navbar-brand glyphicon glyphicon-shopping-cart"></i></a>*@
-                        <div class="product-item-badge">
-                            @if (item.IsFeatured == true)
+        <div class="col-6 col-md-4">
+
+        </div>
+        <div class="col-md-8">
+            @foreach (var item in Model.ListOfProducts)
+            {
+
+                <div class="col-md-6 col-xs-12 pull-right">
+                    <div class="thumbnail" style="text-align:center">
+                        <div style="height:210px; width:100%">
+                            <img class="img-responsive" style="height:inherit; width:inherit" title="Click to view products" src="~/Images/@item.ProductImage" />
+                        </div>
+                        <div class="caption">
+                            <h5>@item.ProductName</h5>
+                            <p>$@item.Price</p>
+                            @if (item.Quantity > 0)
                             {
-                                <p>New</p>
+                                <p>Available</p>
                             }
                             else
                             {
-                                <p>Old</p>
+                                <p>Not Avialabl</p>
                             }
+                            @*<a type="button" style="float:right" href="~/ShoppingCart/AddToCart/@item.ID" ><i class="navbar-brand glyphicon glyphicon-shopping-cart"></i></a>*@
+                            <div class="product-item-badge">
+                                @if (item.IsFeatured == true)
+                                {
+                                    <p>New</p>
+                                }
+                                else
+                                {
+                                    <p>Old</p>
+                                }
+
+                            </div>
+                            @* Product would be added on the layout page cart icon *@
+                            <p>
+                                @*@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, new { @class = "btn btn-primary" })*@
+                                @Html.ActionLink("Product Detail", "GetProduct", "Home", new { id = item.ID }, new { @class = "btn btn-primary" })
+                            </p>
 
                         </div>
-                        @* Product would be added on the layout page cart icon *@
-                        <p class="button">
-                            @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.ID }, "")
-                        </p>
-
                     </div>
                 </div>
+            }
+        </div>
+
+    </div>
+
+    @*<div class="row">
+            <div class="col-sm-6" style="border:dashed; height:260px">
+
             </div>
+            <div class="col-sm-6" style="border:dashed; height:260px">
 
-        }
-    </div>
-
-
-    <div>
-    </div>
-
-        @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page }))
+            </div>
+        </div>*@
+    @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page }))
 
 </div>
 

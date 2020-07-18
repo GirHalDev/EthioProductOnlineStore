@@ -8,7 +8,9 @@ namespace EthioProductShoppingCenter
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //filename with a virtual path (bundle name) based on preference
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                //The relative path of the file
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -25,6 +27,9 @@ namespace EthioProductShoppingCenter
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Creates a minified one
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
