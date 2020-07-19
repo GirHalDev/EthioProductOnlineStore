@@ -1,12 +1,14 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('../Images/test-bg.jpg');
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color:lightgray;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -47,4 +49,43 @@ footer {
 footer div a {
     color: white;
 }
+
+.btn.btn-circle {
+    border-radius:50px;
+}
+
+.btn-facebook {
+    background: #3b579d;
+    color: #ffffff;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus {
+    color: #ffffff;
+    background: #c21d17;
+}
+
+.btn {
+    margin:1.5px;
+}
+
+#divContent {
+    color:#000000;
+}
+
+.display-none {
+    display:none;
+    transition: height 1s, width 1s, padding 1s, visibility 1s, opacity 0.5s ease-out
+}
+
+.dots {
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 29px;
+    display: inline-block
+}
+
 

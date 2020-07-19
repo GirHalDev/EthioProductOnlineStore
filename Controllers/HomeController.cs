@@ -12,6 +12,7 @@ using PagedList;
 using EthioProductShoppingCenter.Models.ShoppingCart;
 using EthioProductShoppingCenter.DomainLayer;
 using EthioProductShoppingCenter.BusinessLogic;
+using System.Threading.Tasks;
 
 namespace EthioProductShoppingCenter.Controllers
 {
@@ -38,6 +39,23 @@ namespace EthioProductShoppingCenter.Controllers
             Product pro = proLogic.GetProduct(id);
 
             return View(pro);
+        }
+
+
+        
+        public async Task<ActionResult> EmailReceiverAsync(EmailReceverViewModel emailRecever)
+        {
+            //if(!ModelState.IsValid)
+            //{
+
+            //}
+            EmailLogic email = new EmailLogic();
+            
+            await email.EmailReceiverAsync(emailRecever.From, emailRecever.Subject, emailRecever.Body);
+
+            
+            return View("Success");
+
         }
 
 

@@ -31,5 +31,15 @@ namespace EthioProductShoppingCenter.BusinessLogic
 
             return mapper.Map<Product>(product);
         }
+
+        //public List<Product> GetProducts()
+        //{
+
+        //    List<tblProduct> product = repository.GetAllRecords().;
+        //    var mapper = MappingConfig.MappingObjects();
+
+
+        //    return mapper.Map<List<Product>>(product);
+        //}
     }
 }

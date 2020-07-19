@@ -206,6 +206,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="BusinessLogic\EmailLogic.cs" />
     <Compile Include="BusinessLogic\PayPalConfiguration.cs" />
     <Compile Include="BusinessLogic\ProductLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Infrastructure\MappingConfig.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CatagoryDetail.cs" />
+    <Compile Include="Models\Home\EmailReceverViewModel.cs" />
     <Compile Include="Models\Home\HomeIndexViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -2299,6 +2301,8 @@
     <Content Include="Views\Payment\PaymentAndOrderInfo.cshtml" />
     <Content Include="Views\Payment\OrderComplete.cshtml" />
     <Content Include="Views\Home\GetProduct.cshtml" />
+    <Content Include="Views\Shared\_EmailModal.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,6 +11,7 @@
     @*Styles a Helper class to render css*@
     @Styles.Render("~/Content/css")
     @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" /> 
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/mobile.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -39,8 +40,8 @@
 
             $('#btnSearchPop').click(function () {
 
-                 
-                if($('#formSearch').css('display', 'none')) {
+
+                if ($('#formSearch').css('display', 'none')) {
                     $('#formSearch').css('display', 'block');
                     $('#navCollapseLeft').css('display', 'none');
                 }
@@ -53,7 +54,7 @@
 
         });
 
-       
+
     </script>
 
 </head>
@@ -151,6 +152,7 @@
                 </div>
                 <div class="col-md-4 col-xs-12">
                     @Html.ActionLink("Contact Us", "Contact", "Home")
+                    @Html.Partial("_EmailModal", new EthioProductShoppingCenter.Models.Home.EmailReceverViewModel())
                     <p>
                         sgfgahuhfl bakfjenejhlij bklrgjlj.fme
                         vdahefk dgjygefkhkDYW KFK,ENFJ BKMMc
@@ -160,7 +162,9 @@
                 </div>
                 <div class="col-md-4 col-xs-12 pull-right">
                     <h4>Social Media</h4>
-
+                    <a class="btn btn-facebook btn-circle" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="btn btn-facebook btn-circle" href="#"><i class="fa fa-instagram"></i></a>
+                    <a class="btn btn-facebook btn-circle" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
 
             </div>

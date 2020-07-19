@@ -17,6 +17,7 @@ namespace EthioProductShoppingCenter.Models
         }
     }
 
+    
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
