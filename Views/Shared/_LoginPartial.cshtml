@@ -1,15 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
 
+@*@{ 
+    if(User.Identity.GetUserName() != null)
+    {
+        char value = User.Identity.GetUserName();
+    }
+    
+}*@
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class="navbar-right" }))
     {
         @Html.AntiForgeryToken()
         @*<ul class="nav navbar-nav navbar-right">*@
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { Title = "manage" })
-            </li>
-            <li><a href="javascript: document.getElementById('logoutForm').submit()">Logoff</a></li>
+            <label style="margin:10px">
+                @Html.ActionLink(User.Identity.GetUserName().Trim().ToCharArray()[0].ToString(), "Index", "Manage", routeValues: null, htmlAttributes: new { Title = "manage", @class = "btn btn-facebook btn-circle" })
+            </label>
+            <label><a href="javascript: document.getElementById('logoutForm').submit()">Logout</a></label>
         @*</ul>*@
 
     }
@@ -20,6 +28,7 @@ else
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "register", @class = "registerLink" })</li>
     
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "", @class = "loginLink" })</li>
+        @*<a href="../Login/Account" class="btn btn-facebook btn-circle loginLink" style="margin:2px">LI</a>*@
     @*</ul>*@
 
 }

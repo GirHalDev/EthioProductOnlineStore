@@ -25,6 +25,12 @@ textarea {
     max-width: 280px;
 }
 
+*{
+    box-sizing:border-box;
+    padding:0;
+    margin:0;
+}
+
 #divNavMobile {
     display: none;
 }
@@ -88,4 +94,36 @@ footer div a {
     display: inline-block
 }
 
+#divProdList{
+    padding:2px;
+}
+
+#leftBlock {
+    width:575px;
+    height:500px;
+    margin:0;
+    padding:0;
+}
+
+.rowFlex {
+    display:flex;
+    height:350px;
+}
+
+.imgLeft {
+    flex-shrink: 13;
+}
+
+
+.pull-right {
+    float: right;
+}
+
+.pagination-container {
+    float: none;
+    display: block;
+    margin-top: 300px;
+}
+
+/**/
 
